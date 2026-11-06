@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Abdul – Data Engineer</title>
+<meta name="description" content="Data engineer building batch, CDC and real-time pipelines with Kafka, Flink, Spark, Databricks and ClickHouse.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF2F5;--surface:#FFFFFF;--ink:#13213B;--muted:#4A5873;--line:#C9D3DE;--accent:#0B7285;--accent-ink:#FFFFFF;--chip:#DDE7EE;
+  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0E1626;--surface:#16223A;--ink:#E7EDF5;--muted:#9FB0C7;--line:#2B3A57;--accent:#4CC9DC;--accent-ink:#0E1626;--chip:#1F2E4B;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#0E1626;--surface:#16223A;--ink:#E7EDF5;--muted:#9FB0C7;--line:#2B3A57;--accent:#4CC9DC;--accent-ink:#0E1626;--chip:#1F2E4B;color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.brand{font:700 20px var(--head);text-decoration:none}
+nav a{margin-left:22px;text-decoration:none;color:var(--muted);font-weight:500}
+nav a:hover{color:var(--ink)}
+.hero{padding:64px 0 40px}
+h1{font:700 clamp(36px,6vw,68px)/1.05 var(--head);letter-spacing:-.02em;margin:0 0 22px;max-width:16ch}
+.lede{font-size:19px;color:var(--muted);max-width:58ch;margin:0 0 30px}
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 24px;border-radius:999px;font-weight:500;text-decoration:none;border:2px solid var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{color:var(--ink)}
+.btn:hover{filter:brightness(1.08)}
+/* pipeline strip: the one memorable element */
+.flow{position:relative;margin:56px 0 0;display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.flow::before{content:"";position:absolute;left:4%;right:4%;top:23px;height:2px;background:var(--line)}
+.flow::after{content:"";position:absolute;top:19px;left:4%;width:10px;height:10px;border-radius:50%;background:var(--accent);animation:packet 5s linear infinite}
+@keyframes packet{from{left:4%}to{left:calc(96% - 10px)}}
+.node{position:relative;text-align:center;padding:0 4px}
+.node b{display:block;width:48px;height:48px;line-height:44px;margin:0 auto 12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);font:700 16px/44px var(--head);position:relative;z-index:1}
+.node strong{display:block;font:700 17px var(--head)}
+.node span{display:block;font-size:14px;color:var(--muted);line-height:1.4}
+section{padding:56px 0;border-top:1px solid var(--line)}
+h2{font:700 clamp(26px,3.6vw,36px)/1.15 var(--head);letter-spacing:-.01em;margin:0 0 10px}
+.sub{color:var(--muted);margin:0 0 34px;max-width:60ch}
+.project{display:grid;grid-template-columns:210px 1fr;gap:28px;padding:30px 0;border-top:1px solid var(--line)}
+.project:first-of-type{border-top:0}
+.kind{font:700 15px var(--head);color:var(--accent);border-left:4px solid var(--accent);padding-left:12px;align-self:start}
+.kind small{display:block;font:400 14px var(--body);color:var(--muted);margin-top:2px}
+.project h3{font:700 24px/1.2 var(--head);margin:0 0 8px}
+.project p{margin:0 0 16px;max-width:62ch}
+.stages{display:flex;flex-wrap:wrap;gap:6px 0;margin:0 0 16px;padding:0;list-style:none}
+.stages li{background:var(--chip);padding:5px 12px;font-size:14px;font-weight:500;border-radius:6px}
+.stages li+li{margin-left:22px;position:relative}
+.stages li+li::before{content:"";position:absolute;left:-17px;top:50%;width:12px;height:2px;background:var(--accent)}
+.stack{font-size:14px;color:var(--muted);margin:0 0 14px}
+.link{font-weight:500;text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-color:var(--accent)}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
+.skills h3{font:700 17px var(--head);margin:0 0 8px;color:var(--accent)}
+.skills p{margin:0;color:var(--muted)}
+.about{max-width:62ch}
+footer{padding:40px 0 56px;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+@media (max-width:760px){
+  nav a{margin-left:14px}
+  .flow{grid-template-columns:1fr;gap:20px;margin-top:40px}
+  .flow::before{left:23px;right:auto;top:4%;bottom:4%;width:2px;height:auto}
+  .flow::after{display:none}
+  .node{display:grid;grid-template-columns:48px 1fr;column-gap:16px;text-align:left;align-items:center}
+  .node b{grid-row:span 2;margin:0}
+  .project{grid-template-columns:1fr;gap:14px}
+}
+@media (prefers-reduced-motion:reduce){.flow::after{animation:none;left:50%}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top">Abdul</a>
+    <nav aria-label="Main"><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <h1>I build data pipelines that run end to end.</h1>
+      <p class="lede">Data engineer focused on batch, change-data-capture and real-time streaming. I take raw data from source systems to dashboards people can trust, using Kafka, Flink, Spark, Databricks and ClickHouse.</p>
+      <div class="btns">
+        <a class="btn primary" href="#projects">View projects</a>
+        <a class="btn ghost" href="https://github.com/furqaan123456" target="_blank" rel="noopener">GitHub profile</a>
+      </div>
+      <div class="flow" aria-label="Typical pipeline: source, ingest, process, store, serve">
+        <div class="node"><b>1</b><strong>Source</strong><span>Databases, files, event streams</span></div>
+        <div class="node"><b>2</b><strong>Ingest</strong><span>Kafka, CDC, Amazon S3</span></div>
+        <div class="node"><b>3</b><strong>Process</strong><span>Flink, Spark, dbt</span></div>
+        <div class="node"><b>4</b><strong>Store</strong><span>ClickHouse, lakehouse</span></div>
+        <div class="node"><b>5</b><strong>Serve</strong><span>Grafana, BI, Genie</span></div>
+      </div>
+    </div>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <p class="sub">Three pipelines, covering real-time streaming, CDC with batch, and a lakehouse built on the Medallion architecture.</p>
+
+      <article class="project">
+        <div class="kind">Real-time streaming<small>Kafka to dashboard</small></div>
+        <div>
+          <h3>Ride-hailing data pipeline</h3>
+          <p>A real-time pipeline that streams ride events through Kafka, processes them in Flink, stores them in ClickHouse and visualizes them live in Grafana.</p>
+          <ol class="stages" aria-label="Pipeline stages"><li>Events</li><li>Kafka</li><li>Flink</li><li>ClickHouse</li><li>Grafana</li></ol>
+          <p class="stack">Python, Apache Kafka, Apache Flink, ClickHouse, Grafana</p>
+          <a class="link" href="https://github.com/furqaan123456/real-time-ride-hailing-data-pipeline" target="_blank" rel="noopener">View repository on GitHub</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="kind">CDC and batch<small>Retail analytics</small></div>
+        <div>
+          <h3>Real-time CDC and batch retail analytics</h3>
+          <p>A data platform that combines real-time change data capture with scheduled batch processing, so retail analytics can use both fresh and historical data.</p>
+          <ol class="stages" aria-label="Pipeline stages"><li>Source database</li><li>CDC stream</li><li>Batch load</li><li>Retail analytics</li></ol>
+          <p class="stack">Python, change data capture, batch processing</p>
+          <a class="link" href="https://github.com/furqaan123456/real-time-cdc-batch-retail-analytics" target="_blank" rel="noopener">View repository on GitHub</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="kind">Lakehouse<small>Databricks, Medallion</small></div>
+        <div>
+          <h3>FMCG lakehouse after an acquisition</h3>
+          <p>A large retailer acquires a smaller company. This pipeline consolidates both companies’ data from Amazon S3 into one lakehouse using Bronze, Silver and Gold layers, then serves a BI dashboard and Genie for natural-language questions.</p>
+          <ol class="stages" aria-label="Pipeline stages"><li>Amazon S3</li><li>Bronze</li><li>Silver</li><li>Gold</li><li>Dashboard and Genie</li></ol>
+          <p class="stack">Python, SQL, Spark, Databricks, Amazon S3, Medallion architecture</p>
+          <a class="link" href="https://github.com/furqaan123456/project-de-fmcg-atlikon" target="_blank" rel="noopener">View repository on GitHub</a>
+        </div>
+      </article>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <p class="sub">Grouped by the job each tool does in a pipeline.</p>
+      <div class="skills">
+        <div><h3>Languages</h3><p>Python, SQL</p></div>
+        <div><h3>Streaming and CDC</h3><p>Apache Kafka, Apache Flink, Debezium</p></div>
+        <div><h3>Batch and transformation</h3><p>Apache Spark, PySpark, dbt, Airflow</p></div>
+        <div><h3>Storage and lakehouse</h3><p>ClickHouse, PostgreSQL, Databricks, Amazon S3</p></div>
+        <div><h3>Quality and serving</h3><p>Great Expectations, Grafana, BI dashboards</p></div>
+        <div><h3>Tooling</h3><p>Docker, Git and GitHub</p></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p class="about">I’m a final-year computer science student in Bengaluru, working toward a career in data engineering. I learn by building complete pipelines rather than isolated exercises, and I care about the parts that make data trustworthy: schema changes, duplicates, data quality checks and clear documentation.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="sub">The code for every project above is on GitHub, each with its own README.</p>
+      <div class="btns"><a class="btn primary" href="https://github.com/furqaan123456" target="_blank" rel="noopener">Visit my GitHub</a></div>
+    </section>
+  </main>
+
+  <footer>Abdul, Data Engineer. Bengaluru, India.</footer>
+</div>
+</body>
+</html>
