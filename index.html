@@ -2,170 +2,525 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>MOHD FURQAAN AHMED – Data Engineer</title>
-<meta name="description" content="Data engineer building batch, CDC and real-time pipelines with Kafka, Flink, Spark, Databricks and ClickHouse.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mohd Furqaan Ahmed — Data Engineer</title>
+<meta name="description" content="Data engineer building batch and real-time pipelines with Databricks, Snowflake, Kafka, Flink, dbt and Airflow. Portfolio of Mohd Furqaan Ahmed.">
+<meta name="theme-color" content="#0E5A63">
+<meta property="og:title" content="Mohd Furqaan Ahmed — Data Engineer">
+<meta property="og:description" content="Batch and real-time data pipelines on Databricks, Snowflake, Kafka, Flink, dbt and Airflow.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E5A63'/%3E%3Ccircle cx='16' cy='32' r='6' fill='%23B8743A'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23AEB8C6'/%3E%3Ccircle cx='48' cy='32' r='6' fill='%23E0B23A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
 <style>
 :root{
-  --bg:#EEF2F5;--surface:#FFFFFF;--ink:#13213B;--muted:#4A5873;--line:#C9D3DE;--accent:#0B7285;--accent-ink:#FFFFFF;--chip:#DDE7EE;
-  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --paper:#F4F6F9;
+  --surface:#FFFFFF;
+  --ink:#172033;
+  --muted:#55607A;
+  --line:#D8DEE8;
+  --teal:#0E5A63;
+  --teal-ink:#FFFFFF;
+  --bronze:#B8743A;
+  --silver:#AEB8C6;
+  --gold:#E0B23A;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Figtree","Segoe UI",system-ui,-apple-system,sans-serif;
   color-scheme:light;
-  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){--bg:#0E1626;--surface:#16223A;--ink:#E7EDF5;--muted:#9FB0C7;--line:#2B3A57;--accent:#4CC9DC;--accent-ink:#0E1626;--chip:#1F2E4B;color-scheme:dark}
+  :root{
+    --paper:#0F1620;
+    --surface:#161F2C;
+    --ink:#E8ECF3;
+    --muted:#9DA9BC;
+    --line:#263243;
+    --teal:#63C6D0;
+    --teal-ink:#0B2A2F;
+    color-scheme:dark;
+  }
 }
-:root[data-theme="dark"]{--bg:#0E1626;--surface:#16223A;--ink:#E7EDF5;--muted:#9FB0C7;--line:#2B3A57;--accent:#4CC9DC;--accent-ink:#0E1626;--chip:#1F2E4B;color-scheme:dark}
-html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body)}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
-header.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
-.brand{font:700 20px var(--head);text-decoration:none}
-nav a{margin-left:22px;text-decoration:none;color:var(--muted);font-weight:500}
-nav a:hover{color:var(--ink)}
-.hero{padding:64px 0 40px}
-h1{font:700 clamp(36px,6vw,68px)/1.05 var(--head);letter-spacing:-.02em;margin:0 0 22px;max-width:16ch}
-.lede{font-size:19px;color:var(--muted);max-width:58ch;margin:0 0 30px}
-.btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-block;padding:13px 24px;border-radius:999px;font-weight:500;text-decoration:none;border:2px solid var(--accent)}
-.btn.primary{background:var(--accent);color:var(--accent-ink)}
-.btn.ghost{color:var(--ink)}
-.btn:hover{filter:brightness(1.08)}
-/* pipeline strip: the one memorable element */
-.flow{position:relative;margin:56px 0 0;display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.flow::before{content:"";position:absolute;left:4%;right:4%;top:23px;height:2px;background:var(--line)}
-.flow::after{content:"";position:absolute;top:19px;left:4%;width:10px;height:10px;border-radius:50%;background:var(--accent);animation:packet 5s linear infinite}
-@keyframes packet{from{left:4%}to{left:calc(96% - 10px)}}
-.node{position:relative;text-align:center;padding:0 4px}
-.node b{display:block;width:48px;height:48px;line-height:44px;margin:0 auto 12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);font:700 16px/44px var(--head);position:relative;z-index:1}
-.node strong{display:block;font:700 17px var(--head)}
-.node span{display:block;font-size:14px;color:var(--muted);line-height:1.4}
-section{padding:56px 0;border-top:1px solid var(--line)}
-h2{font:700 clamp(26px,3.6vw,36px)/1.15 var(--head);letter-spacing:-.01em;margin:0 0 10px}
-.sub{color:var(--muted);margin:0 0 34px;max-width:60ch}
-.project{display:grid;grid-template-columns:210px 1fr;gap:28px;padding:30px 0;border-top:1px solid var(--line)}
-.project:first-of-type{border-top:0}
-.kind{font:700 15px var(--head);color:var(--accent);border-left:4px solid var(--accent);padding-left:12px;align-self:start}
-.kind small{display:block;font:400 14px var(--body);color:var(--muted);margin-top:2px}
-.project h3{font:700 24px/1.2 var(--head);margin:0 0 8px}
-.project p{margin:0 0 16px;max-width:62ch}
-.stages{display:flex;flex-wrap:wrap;gap:6px 0;margin:0 0 16px;padding:0;list-style:none}
-.stages li{background:var(--chip);padding:5px 12px;font-size:14px;font-weight:500;border-radius:6px}
-.stages li+li{margin-left:22px;position:relative}
-.stages li+li::before{content:"";position:absolute;left:-17px;top:50%;width:12px;height:2px;background:var(--accent)}
-.stack{font-size:14px;color:var(--muted);margin:0 0 14px}
-.link{font-weight:500;text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-color:var(--accent)}
-.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
-.skills h3{font:700 17px var(--head);margin:0 0 8px;color:var(--accent)}
-.skills p{margin:0;color:var(--muted)}
-.about{max-width:62ch}
-footer{padding:40px 0 56px;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
-@media (max-width:760px){
-  nav a{margin-left:14px}
-  .flow{grid-template-columns:1fr;gap:20px;margin-top:40px}
-  .flow::before{left:23px;right:auto;top:4%;bottom:4%;width:2px;height:auto}
-  .flow::after{display:none}
-  .node{display:grid;grid-template-columns:48px 1fr;column-gap:16px;text-align:left;align-items:center}
-  .node b{grid-row:span 2;margin:0}
-  .project{grid-template-columns:1fr;gap:14px}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--teal);color:var(--teal-ink);padding:.6rem 1rem;z-index:20}
+.skip:focus{left:1rem;top:1rem}
+.wrap{width:min(1100px,100% - 2.5rem);margin-inline:auto}
+
+/* header */
+.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4rem}
+.brand{font-family:var(--display);font-weight:700;font-size:1.05rem;text-decoration:none;letter-spacing:-.01em}
+.top nav{display:flex;gap:1.5rem;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--muted);font-weight:500;font-size:.98rem;padding:.25rem 0;border-bottom:2px solid transparent}
+.top nav a:hover{color:var(--ink);border-color:var(--teal)}
+
+/* hero */
+.hero{padding:clamp(3rem,8vw,6rem) 0 clamp(2.5rem,5vw,4rem)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,7.4vw,5.2rem);line-height:1;letter-spacing:-.035em;margin:0 0 .6rem}
+.role{font-family:var(--display);font-weight:500;font-size:clamp(1.2rem,2.6vw,1.6rem);color:var(--teal);margin:0 0 1.5rem;letter-spacing:-.01em}
+.lead{max-width:62ch;font-size:1.2rem;color:var(--ink);margin:0 0 2rem}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.35rem;border-radius:8px;font-weight:600;text-decoration:none;border:1.5px solid var(--ink);color:var(--ink);transition:background .15s,color .15s,border-color .15s}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:var(--teal-ink)}
+.btn.primary:hover{filter:brightness(1.1);background:var(--teal);color:var(--teal-ink)}
+
+/* pipeline (the one memorable thing) */
+.pipe-wrap{margin-top:clamp(3rem,7vw,5rem)}
+.pipe{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:1.25rem}
+.track{position:absolute;left:0;right:0;top:6px;height:2px;background:var(--line);pointer-events:none}
+.dot{position:absolute;top:-3px;left:0;width:8px;height:8px;border-radius:50%;background:var(--teal);opacity:0;animation:flow 9s linear infinite}
+.dot:nth-child(2){animation-delay:-2.25s}
+.dot:nth-child(3){animation-delay:-4.5s}
+.dot:nth-child(4){animation-delay:-6.75s}
+@keyframes flow{0%{left:0;opacity:0}6%{opacity:1}94%{opacity:1}100%{left:calc(100% - 8px);opacity:0}}
+.stage{position:relative;padding-top:2rem}
+.node{position:absolute;top:0;left:0;width:14px;height:14px;border-radius:50%;background:var(--c,var(--ink));box-shadow:0 0 0 4px var(--paper)}
+.stage h3{font-family:var(--display);font-weight:700;font-size:1.15rem;margin:0 0 .3rem;letter-spacing:-.01em}
+.stage p{margin:0;color:var(--muted);font-size:.97rem;line-height:1.5}
+.s1{--c:var(--ink)}.s2{--c:var(--teal)}.s3{--c:var(--bronze)}.s4{--c:var(--silver)}.s5{--c:var(--gold)}
+.pipe-note{margin:2rem 0 0;color:var(--muted);font-size:.95rem;max-width:70ch}
+
+/* sections */
+section{padding:clamp(3rem,7vw,5.5rem) 0;border-top:1px solid var(--line)}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4vw,2.8rem);letter-spacing:-.03em;line-height:1.1;margin:0 0 .75rem}
+.sec-intro{max-width:62ch;color:var(--muted);margin:0 0 2.5rem}
+
+/* projects */
+.projects{border-top:1px solid var(--ink)}
+.proj{border-bottom:1px solid var(--line)}
+.proj summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:.25rem 1.5rem;align-items:center;padding:1.6rem 0}
+.proj summary::-webkit-details-marker{display:none}
+.proj summary:hover h3{color:var(--teal)}
+.proj h3{font-family:var(--display);font-weight:700;font-size:clamp(1.25rem,2.6vw,1.7rem);letter-spacing:-.02em;line-height:1.2;margin:0;transition:color .15s}
+.proj .sub{grid-column:1;color:var(--muted);font-size:.98rem;margin:0}
+.plus{grid-column:2;grid-row:1 / span 2;width:34px;height:34px;border:1.5px solid var(--line);border-radius:50%;position:relative;transition:transform .2s,border-color .2s}
+.plus::before,.plus::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;background:var(--ink);transform:translate(-50%,-50%)}
+.plus::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .2s}
+.proj[open] .plus{border-color:var(--teal)}
+.proj[open] .plus::after{transform:translate(-50%,-50%) rotate(0)}
+.proj-body{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:2rem 3rem;padding:.25rem 0 2.25rem}
+.proj-body ul{margin:0;padding-left:1.15rem}
+.proj-body li{margin-bottom:.7rem;max-width:68ch}
+.proj-body li::marker{color:var(--teal)}
+.side h4{font-family:var(--display);font-size:1rem;font-weight:700;margin:0 0 .6rem}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 1.5rem;padding:0;list-style:none}
+.tags li{margin:0;padding:.2rem .6rem;border:1px solid var(--line);background:var(--surface);border-radius:4px;font-size:.88rem;font-weight:500}
+.repo{display:inline-block;font-weight:600;color:var(--teal);text-underline-offset:4px}
+.flow{display:flex;flex-wrap:wrap;gap:.35rem .5rem;align-items:center;margin:0 0 1.5rem;color:var(--muted);font-size:.9rem}
+.flow b{font-weight:600;color:var(--ink)}
+
+/* skills */
+.skills{border-top:1px solid var(--ink)}
+.skill-row{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:.5rem 2rem;padding:1.25rem 0;border-bottom:1px solid var(--line)}
+.skill-row h3{font-family:var(--display);font-weight:700;font-size:1.1rem;margin:0;letter-spacing:-.01em}
+.skill-row .tags{margin:0}
+.concepts{margin-top:2.5rem;max-width:68ch;color:var(--muted)}
+
+/* education */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem 4rem}
+.item h3{font-family:var(--display);font-weight:700;font-size:1.3rem;margin:0 0 .2rem;letter-spacing:-.015em}
+.item .meta{color:var(--teal);font-weight:600;margin:0 0 .6rem}
+.item p{margin:0 0 .6rem;max-width:56ch}
+.item .bits{color:var(--muted)}
+
+/* contact */
+.contact{background:var(--surface)}
+.contact h2{max-width:20ch}
+.contact p{max-width:56ch;color:var(--muted);margin:0 0 2rem}
+footer{padding:2rem 0 3rem;color:var(--muted);font-size:.92rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+
+/* responsive */
+@media (max-width:900px){
+  .pipe{grid-template-columns:1fr;gap:0;padding-left:1.75rem}
+  .track{left:6px;right:auto;top:0;bottom:0;width:2px;height:auto}
+  .dot{display:none}
+  .stage{padding:0 0 1.5rem 1.25rem}
+  .node{left:-1.75rem;top:.35rem}
+  .proj-body{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .skill-row{grid-template-columns:1fr}
 }
-@media (prefers-reduced-motion:reduce){.flow::after{animation:none;left:50%}html{scroll-behavior:auto}}
+@media (max-width:560px){
+  .top nav{gap:1rem}
+  .brand{display:none}
+  .top .wrap{justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .dot{animation:none;opacity:0}
+  *{transition:none!important}
+}
+@media print{.top{position:static}.dot{display:none}}
+
+/* ---------- animation ---------- */
+main{position:relative}
+main>.wrap{position:relative;z-index:1}
+#stream{position:absolute;top:0;left:0;width:100%;height:700px;z-index:0;pointer-events:none;
+  -webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:linear-gradient(90deg,var(--bronze),var(--silver),var(--gold));transform:scaleX(0);transform-origin:0 50%}
+.top nav a.active{color:var(--ink);border-color:var(--teal)}
+
+/* hero load sequence */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+.w>span{display:inline-block;transform:translateY(108%);animation:word .95s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*.13s + .1s)}
+.rise{opacity:0;transform:translateY(18px);animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,.5s)}
+.cycle{margin:-.9rem 0 1.5rem;color:var(--muted);font-size:1.05rem}
+.cycle span{display:inline-block;font-weight:600;color:var(--ink);transition:opacity .35s,transform .35s}
+.cycle span.out{opacity:0;transform:translateY(-8px)}
+.cycle span.pre{opacity:0;transform:translateY(8px);transition:none}
+@keyframes word{to{transform:none}}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+@keyframes ping{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(3);opacity:0}}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.88)}to{opacity:1;transform:none}}
+@keyframes unfold{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+
+/* pipeline entrance + pulse */
+.track{opacity:0;animation:fade .8s 1.2s forwards}
+.stage{opacity:0;animation:rise .7s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(1.3s + var(--k)*.16s)}
+.node::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--c);opacity:0;animation:ping 5s ease-out infinite;animation-delay:calc(2.4s + var(--k)*.7s)}
+
+/* scroll reveal */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:var(--rd,0s)}
+.js .rv.in{opacity:1;transform:none}
+.js .skill-row .tags li{opacity:0}
+.js .skill-row.in .tags li{animation:pop .45s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*55ms + .2s)}
+.proj[open] .proj-body{animation:unfold .4s cubic-bezier(.2,.8,.2,1)}
+.proj[open] .tags li{animation:pop .4s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*45ms + .12s)}
+
+/* hover and press feedback */
+.btn{transition:transform .18s,background .15s,color .15s,border-color .15s,box-shadow .18s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 22px -12px rgba(14,90,99,.55)}
+.btn:active{transform:translateY(0)}
+.tags li{transition:transform .18s,border-color .18s}
+.tags li:hover{transform:translateY(-2px);border-color:var(--teal)}
+.stage .node{transition:transform .2s}
+.stage:hover .node{transform:scale(1.35)}
+.proj summary:hover .plus{border-color:var(--teal);transform:rotate(90deg)}
+.proj[open] summary:hover .plus{transform:rotate(180deg)}
+
+@media (prefers-reduced-motion:reduce){
+  .w>span,.rise,.stage,.track{animation:none!important;opacity:1!important;transform:none!important}
+  .node::after,.progress{display:none}
+  .js .rv,.js .skill-row .tags li{opacity:1!important;transform:none!important;animation:none!important}
+  #stream{display:none}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <a class="brand" href="#top">Abdul</a>
-    <nav aria-label="Main"><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
-  </header>
+<a class="skip" href="#projects">Skip to projects</a>
 
-  <main id="top">
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Mohd Furqaan Ahmed</a>
+    <nav aria-label="Main">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+
+<main id="top">
+  <canvas id="stream" aria-hidden="true"></canvas>
+  <div class="wrap">
     <div class="hero">
-      <h1>I build data pipelines that run end to end.</h1>
-      <p class="lede">Data engineer focused on batch, change-data-capture and real-time streaming. I take raw data from source systems to dashboards people can trust, using Kafka, Flink, Spark, Databricks and ClickHouse.</p>
-      <div class="btns">
-        <a class="btn primary" href="#projects">View projects</a>
-        <a class="btn ghost" href="https://github.com/furqaan123456" target="_blank" rel="noopener">GitHub profile</a>
+      <h1 aria-label="Mohd Furqaan Ahmed"><span class="w" style="--i:0" aria-hidden="true"><span>Mohd</span></span> <span class="w" style="--i:1" aria-hidden="true"><span>Mohd Furqaan</span></span> <span class="w" style="--i:2" aria-hidden="true"><span>Ahmed</span></span></h1>
+      <p class="role rise" style="--d:.6s">Data Engineer</p>
+      <p class="cycle rise" style="--d:.75s" aria-hidden="true">Hands-on with <span id="cycle">Databricks</span></p>
+      <p class="lead rise" style="--d:.9s">I build batch and real-time pipelines that take messy source data and turn it into tested, analytics-ready tables. My projects use Databricks, Snowflake, Kafka, Flink, dbt and Airflow.</p>
+      <div class="actions rise" style="--d:1.05s">
+        <a class="btn primary" href="assets/Furqaan_Ahmed_Resume.pdf" download>Download resume</a>
+        <a class="btn" href="https://github.com/furqaan123456" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="mailto:Furqaanahmed66@gmail.com">Email me</a>
       </div>
-      <div class="flow" aria-label="Typical pipeline: source, ingest, process, store, serve">
-        <div class="node"><b>1</b><strong>Source</strong><span>Databases, files, event streams</span></div>
-        <div class="node"><b>2</b><strong>Ingest</strong><span>Kafka, CDC, Amazon S3</span></div>
-        <div class="node"><b>3</b><strong>Process</strong><span>Flink, Spark, dbt</span></div>
-        <div class="node"><b>4</b><strong>Store</strong><span>ClickHouse, lakehouse</span></div>
-        <div class="node"><b>5</b><strong>Serve</strong><span>Grafana, BI, Genie</span></div>
+
+      <div class="pipe-wrap">
+        <div class="pipe" role="img" aria-label="Pipeline diagram: sources, streaming, bronze, silver and gold layers">
+          <div class="track" aria-hidden="true"><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
+          <div class="stage s1" style="--k:0"><span class="node"></span><h3>Sources</h3><p>REST APIs, CSV files and live database changes</p></div>
+          <div class="stage s2" style="--k:1"><span class="node"></span><h3>Stream</h3><p>Debezium and Kafka capture changes as they happen</p></div>
+          <div class="stage s3" style="--k:2"><span class="node"></span><h3>Bronze</h3><p>Raw data lands exactly as received</p></div>
+          <div class="stage s4" style="--k:3"><span class="node"></span><h3>Silver</h3><p>Cleaned, de-duplicated and validated</p></div>
+          <div class="stage s5" style="--k:4"><span class="node"></span><h3>Gold</h3><p>Fact and dimension tables ready for reports</p></div>
+        </div>
+        <p class="pipe-note">This is the shape most of my projects take, from ingestion through to the tables a dashboard reads.</p>
       </div>
     </div>
+  </div>
 
-    <section id="projects">
+  <section id="projects">
+    <div class="wrap">
       <h2>Projects</h2>
-      <p class="sub">Three pipelines, covering real-time streaming, CDC with batch, and a lakehouse built on the Medallion architecture.</p>
+      <p class="sec-intro">Four self-driven, end-to-end pipelines across retail, mobility, FMCG and sports analytics. Open a project to see what I built.</p>
 
-      <article class="project">
-        <div class="kind">Real-time streaming<small>Kafka to dashboard</small></div>
-        <div>
-          <h3>Ride-hailing data pipeline</h3>
-          <p>A real-time pipeline that streams ride events through Kafka, processes them in Flink, stores them in ClickHouse and visualizes them live in Grafana.</p>
-          <ol class="stages" aria-label="Pipeline stages"><li>Events</li><li>Kafka</li><li>Flink</li><li>ClickHouse</li><li>Grafana</li></ol>
-          <p class="stack">Python, Apache Kafka, Apache Flink, ClickHouse, Grafana</p>
-          <a class="link" href="https://github.com/furqaan123456/real-time-ride-hailing-data-pipeline" target="_blank" rel="noopener">View repository on GitHub</a>
-        </div>
-      </article>
+      <div class="projects">
 
-      <article class="project">
-        <div class="kind">CDC and batch<small>Retail analytics</small></div>
-        <div>
-          <h3>Real-time CDC and batch retail analytics</h3>
-          <p>A data platform that combines real-time change data capture with scheduled batch processing, so retail analytics can use both fresh and historical data.</p>
-          <ol class="stages" aria-label="Pipeline stages"><li>Source database</li><li>CDC stream</li><li>Batch load</li><li>Retail analytics</li></ol>
-          <p class="stack">Python, change data capture, batch processing</p>
-          <a class="link" href="https://github.com/furqaan123456/real-time-cdc-batch-retail-analytics" target="_blank" rel="noopener">View repository on GitHub</a>
-        </div>
-      </article>
+        <details class="proj" open>
+          <summary>
+            <h3>Real-Time CDC and Batch Platform for Retail Analytics</h3>
+            <p class="sub">Retail analytics · Change data capture plus scheduled batch loads</p>
+            <span class="plus" aria-hidden="true"></span>
+          </summary>
+          <div class="proj-body">
+            <ul>
+              <li>Combined REST API, CSV and real-time PostgreSQL CDC data into one retail data warehouse using Debezium, Kafka and Airflow.</li>
+              <li>Designed a layered warehouse (Raw, Staging, Intermediate, Marts) in PostgreSQL and dbt, with incremental transformations.</li>
+              <li>Added automated data quality checks with Great Expectations and 24 dbt tests.</li>
+              <li>Orchestrated batch and streaming ingestion in Airflow, with SLA monitoring, failure alerts and recovery workflows.</li>
+              <li>Generated dbt lineage docs and wrote source-to-warehouse reconciliation tests for row counts and revenue accuracy.</li>
+              <li>Packaged everything with Docker Compose so the platform runs locally from one command.</li>
+            </ul>
+            <div class="side">
+              <h4>Stack</h4>
+              <ul class="tags"><li>Python</li><li>SQL</li><li>PostgreSQL</li><li>Kafka</li><li>Debezium</li><li>Airflow</li><li>dbt</li><li>Great Expectations</li><li>Docker Compose</li></ul>
+              <a class="repo" href="https://github.com/furqaan123456/real-time-cdc-batch-retail-analytics" target="_blank" rel="noopener">View source on GitHub</a>
+            </div>
+          </div>
+        </details>
 
-      <article class="project">
-        <div class="kind">Lakehouse<small>Databricks, Medallion</small></div>
-        <div>
-          <h3>FMCG lakehouse after an acquisition</h3>
-          <p>A large retailer acquires a smaller company. This pipeline consolidates both companies’ data from Amazon S3 into one lakehouse using Bronze, Silver and Gold layers, then serves a BI dashboard and Genie for natural-language questions.</p>
-          <ol class="stages" aria-label="Pipeline stages"><li>Amazon S3</li><li>Bronze</li><li>Silver</li><li>Gold</li><li>Dashboard and Genie</li></ol>
-          <p class="stack">Python, SQL, Spark, Databricks, Amazon S3, Medallion architecture</p>
-          <a class="link" href="https://github.com/furqaan123456/project-de-fmcg-atlikon" target="_blank" rel="noopener">View repository on GitHub</a>
-        </div>
-      </article>
-    </section>
+        <details class="proj">
+          <summary>
+            <h3>Real-Time Ride-Hailing Pipeline</h3>
+            <p class="sub">Mobility · Kafka, Flink and ClickHouse streaming to live dashboards</p>
+            <span class="plus" aria-hidden="true"></span>
+          </summary>
+          <div class="proj-body">
+            <ul>
+              <li>Wrote a Python event simulator that publishes ride, driver-location and trip events to Kafka, with Avro schemas managed in Schema Registry.</li>
+              <li>Built Flink SQL jobs for real-time processing, including windowed aggregations on trip and demand metrics.</li>
+              <li>Loaded processed streams into ClickHouse for low-latency analytical queries, and used Redis as a fast layer for live state.</li>
+              <li>Created Grafana dashboards to monitor key ride-hailing metrics in real time.</li>
+              <li>Containerized the full stack with Docker Compose and documented the architecture and setup in the repository.</li>
+            </ul>
+            <div class="side">
+              <h4>Stack</h4>
+              <ul class="tags"><li>Python</li><li>Kafka</li><li>Schema Registry (Avro)</li><li>Flink SQL</li><li>Redis</li><li>ClickHouse</li><li>Grafana</li><li>Docker Compose</li></ul>
+              <a class="repo" href="https://github.com/furqaan123456" target="_blank" rel="noopener">Find it on my GitHub</a>
+            </div>
+          </div>
+        </details>
 
-    <section id="skills">
-      <h2>Skills</h2>
-      <p class="sub">Grouped by the job each tool does in a pipeline.</p>
-      <div class="skills">
-        <div><h3>Languages</h3><p>Python, SQL</p></div>
-        <div><h3>Streaming and CDC</h3><p>Apache Kafka, Apache Flink, Debezium</p></div>
-        <div><h3>Batch and transformation</h3><p>Apache Spark, PySpark, dbt, Airflow</p></div>
-        <div><h3>Storage and lakehouse</h3><p>ClickHouse, PostgreSQL, Databricks, Amazon S3</p></div>
-        <div><h3>Quality and serving</h3><p>Great Expectations, Grafana, BI dashboards</p></div>
-        <div><h3>Tooling</h3><p>Docker, Git and GitHub</p></div>
+        <details class="proj">
+          <summary>
+            <h3>Databricks Lakehouse for FMCG</h3>
+            <p class="sub">Consumer goods · Medallion architecture on Delta Lake</p>
+            <span class="plus" aria-hidden="true"></span>
+          </summary>
+          <div class="proj-body">
+            <ul>
+              <li>Ingested raw sales, customer and product data from Amazon S3 into Databricks using a bronze, silver and gold medallion design.</li>
+              <li>Cleaned and standardized data in PySpark and Spark SQL notebooks, handling duplicates, nulls and data-type inconsistencies.</li>
+              <li>Stored every layer as Delta tables and used incremental processing so unchanged data is not reprocessed.</li>
+              <li>Modeled fact and dimension tables in the gold layer for sales and product performance reporting.</li>
+              <li>Version-controlled all notebooks in GitHub.</li>
+            </ul>
+            <div class="side">
+              <h4>Stack</h4>
+              <ul class="tags"><li>Databricks</li><li>PySpark</li><li>Spark SQL</li><li>Delta Lake</li><li>Amazon S3</li><li>Python</li><li>SQL</li></ul>
+              <a class="repo" href="https://github.com/furqaan123456/project-de-fmcg-atlikon" target="_blank" rel="noopener">View source on GitHub</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="proj">
+          <summary>
+            <h3>Snowflake Cricket Analytics</h3>
+            <p class="sub">Sports analytics · ODI match data from raw JSON to a reporting dashboard</p>
+            <span class="plus" aria-hidden="true"></span>
+          </summary>
+          <div class="proj-body">
+            <ul>
+              <li>Loaded raw ODI cricket match files in JSON format into Snowflake staging tables.</li>
+              <li>Profiled the data first to understand structure, nulls, duplicates and quality issues before transforming anything.</li>
+              <li>Flattened and cleansed semi-structured JSON into relational tables using Snowflake SQL.</li>
+              <li>Built fact and dimension models for match, team, player and delivery-level analytics.</li>
+              <li>Delivered a pipeline and dashboard covering team performance, player statistics and match results.</li>
+            </ul>
+            <div class="side">
+              <h4>Stack</h4>
+              <ul class="tags"><li>Snowflake</li><li>SQL</li><li>JSON</li><li>Python</li><li>Dimensional modeling</li><li>ELT</li></ul>
+              <a class="repo" href="https://github.com/furqaan123456" target="_blank" rel="noopener">Find it on my GitHub</a>
+            </div>
+          </div>
+        </details>
+
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="about">
-      <h2>About</h2>
-      <p class="about">I’m a final-year computer science student in Bengaluru, working toward a career in data engineering. I learn by building complete pipelines rather than isolated exercises, and I care about the parts that make data trustworthy: schema changes, duplicates, data quality checks and clear documentation.</p>
-    </section>
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <p class="sec-intro">Grouped by where they sit in a pipeline, from getting data in to getting it in front of people.</p>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p class="sub">The code for every project above is on GitHub, each with its own README.</p>
-      <div class="btns"><a class="btn primary" href="https://github.com/furqaan123456" target="_blank" rel="noopener">Visit my GitHub</a></div>
-    </section>
-  </main>
+      <div class="skills">
+        <div class="skill-row"><h3>Ingest</h3>
+          <ul class="tags"><li>Apache Kafka</li><li>Debezium (CDC)</li><li>Schema Registry (Avro)</li><li>Amazon S3</li><li>Azure Data Factory</li></ul></div>
+        <div class="skill-row"><h3>Process and transform</h3>
+          <ul class="tags"><li>SQL</li><li>Python</li><li>PySpark</li><li>Spark SQL</li><li>Databricks</li><li>Delta Lake</li><li>Flink SQL</li><li>dbt</li><li>Jinja</li></ul></div>
+        <div class="skill-row"><h3>Store</h3>
+          <ul class="tags"><li>Snowflake</li><li>PostgreSQL</li><li>MySQL</li><li>ClickHouse</li><li>Redshift</li><li>Redis</li><li>Azure Data Lake Storage</li></ul></div>
+        <div class="skill-row"><h3>Orchestrate and test</h3>
+          <ul class="tags"><li>Apache Airflow</li><li>Great Expectations</li><li>dbt tests</li><li>Docker</li><li>Git</li><li>GitHub</li></ul></div>
+        <div class="skill-row"><h3>Cloud platforms</h3>
+          <ul class="tags"><li>AWS: S3, Glue, IAM, EC2, Redshift</li><li>Azure: ADF, ADLS, Azure Databricks</li></ul></div>
+        <div class="skill-row"><h3>Serve and work</h3>
+          <ul class="tags"><li>Grafana</li><li>Jupyter Notebook</li><li>VS Code</li><li>PyCharm</li><li>Jira</li><li>Agile/Scrum</li></ul></div>
+      </div>
 
-  <footer>Abdul, Data Engineer. Bengaluru, India.</footer>
-</div>
+      <p class="concepts">Underneath the tools: ETL and ELT, dimensional modeling, incremental processing, partitioning, data quality, joins, CTEs, window functions and performance tuning.</p>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <h2>Education and training</h2>
+      <p class="sec-intro">A computer science degree, plus hands-on practice building pipelines on my own.</p>
+      <div class="two">
+        <div class="item">
+          <h3>B.E. in Computer Science and Engineering</h3>
+          <p class="meta">VTU, 2026 · CGPA 7.9/10</p>
+          <p class="bits">Visvesvaraya Technological University.</p>
+        </div>
+        <div class="item">
+          <h3>Salesforce internship</h3>
+          <p class="meta">90 days</p>
+          <p class="bits">Exposure to Salesforce Administration and Apex development.</p>
+        </div>
+        <div class="item">
+          <h3>Data engineering practice</h3>
+          <p class="meta">Nexvia Technologies</p>
+          <p class="bits">SQL, Python, Git and GitHub, Scrum, big data, Airflow and cloud data engineering concepts.</p>
+        </div>
+        <div class="item">
+          <h3>Cloud, lakehouse and streaming</h3>
+          <p class="meta">Hands-on</p>
+          <p class="bits">AWS, Databricks and Delta Lake for lakehouse work; Kafka, Flink, ClickHouse and Grafana for real-time pipelines.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Open to data engineering roles</h2>
+      <p>If you are hiring, or want to talk about any of these projects, email is the quickest way to reach me.</p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:Furqaanahmed66@gmail.com">Furqaanahmed66@gmail.com</a>
+        <a class="btn" href="https://github.com/furqaan123456" target="_blank" rel="noopener">github.com/furqaan123456</a>
+        <a class="btn" href="assets/Furqaan_Ahmed_Resume.pdf" download>Download resume</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Mohd Furqaan Ahmed</span>
+    <span>Built with plain HTML and CSS, hosted on GitHub Pages.</span>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* index for staggered tags */
+  document.querySelectorAll('.tags').forEach(function(t){
+    t.querySelectorAll('li').forEach(function(li,i){li.style.setProperty('--i',i)});
+  });
+
+  /* scroll progress + active nav */
+  var bar=document.querySelector('.progress');
+  var links=[].slice.call(document.querySelectorAll('.top nav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function onScroll(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    bar.style.transform='scaleX('+(max>0?h.scrollTop/max:0)+')';
+    var y=h.scrollTop+window.innerHeight*0.35,cur=-1;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i});
+    links.forEach(function(a,i){a.classList.toggle('active',i===cur)});
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  /* scroll reveal */
+  if(!reduce&&'IntersectionObserver' in window){
+    var targets=document.querySelectorAll('section h2,.sec-intro,.proj,.skill-row,.item,.concepts,.contact p,.contact .actions');
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+    },{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+    targets.forEach(function(el,i){
+      el.classList.add('rv');
+      el.style.setProperty('--rd',(i%4)*0.08+'s');
+      io.observe(el);
+    });
+    document.querySelectorAll('.skill-row').forEach(function(r){r.classList.add('rv')});
+  }
+
+  if(reduce)return;
+
+  /* rotating tool name */
+  var cyc=document.getElementById('cycle');
+  var words=['Databricks','Snowflake','Apache Kafka','Apache Flink','dbt','Airflow','ClickHouse','PySpark'];
+  var wi=0;
+  setInterval(function(){
+    cyc.classList.add('out');
+    setTimeout(function(){
+      wi=(wi+1)%words.length;
+      cyc.textContent=words[wi];
+      cyc.classList.remove('out');
+      cyc.classList.add('pre');
+      void cyc.offsetWidth;
+      cyc.classList.remove('pre');
+    },350);
+  },2400);
+
+  /* data-stream particles behind the hero: colour shifts with the pipeline stages */
+  var c=document.getElementById('stream'),x=c.getContext('2d');
+  var W=0,H=0,P=[],running=true,vis=true,dpr=Math.min(devicePixelRatio||1,2),cols;
+  function palette(){
+    var cs=getComputedStyle(document.documentElement);
+    cols=[cs.getPropertyValue('--muted').trim(),cs.getPropertyValue('--teal').trim(),
+          cs.getPropertyValue('--bronze').trim(),cs.getPropertyValue('--silver').trim(),cs.getPropertyValue('--gold').trim()];
+  }
+  function size(){
+    var hero=document.querySelector('.hero');
+    W=c.clientWidth;H=Math.min(hero.offsetHeight+80,900);
+    c.style.height=H+'px';c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.max(18,Math.round(W/26));P=[];
+    for(var i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,v:.35+Math.random()*.9,r:1+Math.random()*1.6});
+  }
+  function frame(){
+    if(running&&vis){
+      x.clearRect(0,0,W,H);
+      for(var i=0;i<P.length;i++){
+        var p=P[i];p.x+=p.v;
+        if(p.x>W+20){p.x=-20;p.y=Math.random()*H}
+        var f=Math.min(4,Math.floor(p.x/W*5));if(f<0)f=0;
+        x.globalAlpha=.16;x.fillStyle=cols[f];x.fillRect(p.x-p.v*26,p.y,p.v*26,1);
+        x.globalAlpha=.55;x.beginPath();x.arc(p.x,p.y,p.r,0,6.2832);x.fill();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  palette();size();frame();
+  addEventListener('resize',size);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',palette);
+  document.addEventListener('visibilitychange',function(){running=!document.hidden});
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(document.querySelector('.hero'));
+  }
+})();
+</script>
 </body>
 </html>
